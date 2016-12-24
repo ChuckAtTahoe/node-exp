@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    div.container
+      div.container-fluid
+        div.float-xs-right
+          nav.nav.nav-inline
+            a(class='nav-link', href='#') Houses
+            a(class='nav-link', href='#') Members
+            a(class='nav-link', href='#') Events
+      div.jumbotron
+        h1 The Barlow House
+        p We're about these things. Lake Tahoe. Cats. San Jose Sharks.
+        p Do the right thing. No mean people.
+      block content

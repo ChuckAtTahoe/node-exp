@@ -1,31 +1,48 @@
-#!/usr/bin/env node
-
 /**
  * Module dependencies.
  */
 
 var app = require('../app');
 var debug = require('debug')('node-exp:server');
-var http = require('http');
+/*
+ * Change made by Chuck Barlow 12/24/2016:
+ * Replaced the normal require('http') line here, with the
+ * following alternate code to use https with properties
+ * coming from the file config.json
+ */
+var fs = require('fs');
+var https = require('https');
+var config = require('../config/config.json');
+
 
 /**
  * Get port from environment and store in Express.
+ *
+ * 12/24/2016 (CB) - note the config.port alternative added here.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || config.port || '3000');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Create *HTTPS* server.
+ *
+ * 12/24/2016 (CB) - modified this section for https server.
  */
 
-var server = http.createServer(app);
+var keyFile = config.https.key;
+config.https.key = fs.readFileSync(keyFile);
+var certFile = config.https.cert;
+config.https.cert = fs.readFileSync(certFile);
+var caFile = config.https.ca;
+config.https.ca = fs.readFileSync(caFile);
+var server = https.createServer(config.https, app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(app.get('port'));
 server.on('error', onError);
 server.on('listening', onListening);
 

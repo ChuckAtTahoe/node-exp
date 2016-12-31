@@ -1,0 +1,14 @@
+{
+  "port": 7251,
+  "host": "localhost",
+  "https": {
+    "cert": "/home/chuck/ssl/thesslstore.com/cert-2016/ServerCertificate.cer",
+    "key": "/home/chuck/ssl/thesslstore.com/barlowhouse-net-server.key",
+    "ca": "/home/chuck/ssl/barlow-ca.cer",
+    "requestCert": true,
+    "rejectUnauthorized": true,
+    "ciphers": "ECDHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA256:AES128-GCM-SHA256:RC4:HIGH:!MD5:!aNULL",
+    "honorCipherOrder": true,
+    "secureProtocol": "TLSv1_2_method"
+  }
+}
